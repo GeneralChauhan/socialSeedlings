@@ -1,0 +1,77 @@
+/* styles.css */
+
+/* Common styles */
+.body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header styles */
+  .header {
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .navList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navItem {
+    margin: 0 10px;
+  }
+  
+  .navItem a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .navItem a:hover {
+    color: #007bff;
+  }
+  
+  /* FeedItem styles */
+  .feedItem {
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    margin: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  .photoImg {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* GridView styles */
+  .gridView {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  /* ListView styles */
+  .listView {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* ProfilePhotos styles */
+  .profilePhotos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  /* Add more styles as needed */
+  
