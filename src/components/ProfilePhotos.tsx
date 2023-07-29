@@ -1,6 +1,7 @@
 import FeedItem from './FeedItem';
 import { Photo } from './types';
 import styles from './styles.module.css';
+import GridView from './GridView';
 
 interface ProfilePhotosProps {
     photos: Photo[];
@@ -10,7 +11,7 @@ interface ProfilePhotosProps {
     return (
       <div className={styles.profilePhotos}>
         {photos.map((photo) => (
-          <FeedItem key={photo.id} photo={photo} />
+          <GridView key={photo.id} photos={photo} />
         ))}
       </div>
     );

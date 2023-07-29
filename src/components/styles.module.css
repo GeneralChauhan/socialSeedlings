@@ -2,76 +2,169 @@
 
 /* Common styles */
 .body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--primary-bg-color);
+  color: var(--text-color);
   }
-  
-  /* Header styles */
-  .header {
-    background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .navList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .navItem {
-    margin: 0 10px;
-  }
-  
-  .navItem a {
-    text-decoration: none;
-    color: #000;
-  }
-  
-  .navItem a:hover {
-    color: #007bff;
-  }
-  
-  /* FeedItem styles */
-  .feedItem {
-    border: 1px solid #e1e1e1;
-    border-radius: 4px;
-    margin: 10px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .photoImg {
-    width: 100%;
-    height: auto;
-  }
-  
-  /* GridView styles */
-  .gridView {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  
-  /* ListView styles */
-  .listView {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  /* ProfilePhotos styles */
-  .profilePhotos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  
-  /* Add more styles as needed */
+ /* components/Header.module.css */
+ .header {
+  background-color: var(--primary-bg-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  margin: 0 15px;
+}
+
+.navItem a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.navItem a:hover {
+  color: #007bff;
+}
+
+.themeButton {
+  background-color: var(--secondary-bg-color); /* Use secondary background color for the button */
+  color: var(--text-color);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Style the button for the dark theme */
+[data-theme='dark'] .themeButton {
+  background-color: var(--secondary-bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+
+/* Add more styles as needed */
+/* components/ListView.module.css */
+
+
+.listView {
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Display photos in a single column */
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--secondary-bg-color);
+}
+
+/* Optional: Adjust the width of each photo */
+.feedItem {
+  max-width: 100%; /* Set maximum width to prevent images from stretching */
+  margin: 0 auto; /* Center each photo horizontally */
+  width: 250px; /* Set the width of each photo */
+  height: 250px; /* Set the height of each photo to create a square */
+  object-fit: cover; /* Ensure the entire image is visible */
+}
+
+
+.loader {
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* Add more styles as needed */
+/* components/FeedItem.module.css */
+
+.feedItem {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.photoImg {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Add more styles as needed */
+/* components/ProfilePhotos.module.css */
+
+.profilePhotos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Add more styles as needed */
+
+.themeSwitcher {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  border-radius: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--secondary-bg-color);
+  transition: background-color 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--text-color);
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input:checked + .slider {
+  background-color: var(--secondary-bg-color-dark);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
   

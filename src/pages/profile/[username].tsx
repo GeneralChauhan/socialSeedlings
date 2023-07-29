@@ -1,48 +1,60 @@
-import { useState, useEffect } from 'react';
+// pages/profile/[username].tsx
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Photo } from '../../components/types';
-import Header from '../../components/Headers';
 import GridView from '../../components/GridView';
 import ListView from '../../components/ListView';
-import ProfilePhotos from '../../components/ProfilePhotos';
+import Header from '../../components/Headers';
+import styles from '../../components/styles.module.css';
+import { Photo } from '../../components/types';
 
-const UserProfile: React.FC = () => {
+const Profile: React.FC = () => {
   const router = useRouter();
   const { username } = router.query;
-
+  const [view, setView] = useState<'grid' | 'list'>('grid');
   const [photos, setPhotos] = useState<Photo[]>([]);
-  const [viewType, setViewType] = useState<'grid' | 'list'>('grid');
 
   useEffect(() => {
     if (username) {
-      // Fetch user details and photos based on the username from the API
-      axios
-        .get<Photo[]>(`https://api.unsplash.com/users/${username}/photos`, {
-          params: {
-            client_id: 'bWUHyYl0DgIN_x1NXB-LWAAkzybxQHFcPilulRVJ75A',
-          },
-        })
-        .then((response) => setPhotos(response.data))
-        .catch((error) => console.error('Error fetching user photos:', error));
+      // Fetch user photos based on the username (use your own API endpoint)
+      fetchPhotos(username as string);
     }
   }, [username]);
 
-  const handleViewTypeChange = (type: 'grid' | 'list') => {
-    setViewType(type);
+  const toggleView = () => {
+    setView((prevView) => (prevView === 'grid' ? 'list' : 'grid'));
+  };
+
+  const handleLoadMore = () => {
+    // Implement the logic to load more photos and update the hasMore state accordingly
+  };
+
+  const fetchPhotos = (username: string) => {
+    axios
+      .get<Photo[]>(`https://api.example.com/photos/${username}`, {
+        // Replace "api.example.com" with your actual API endpoint
+      })
+      .then((response) => {
+        setPhotos(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching photos:', error);
+      });
   };
 
   return (
-    <>
-      <Header />
-      <div>
+    <div>
+      <Header toggleView={toggleView} view={view} />
+      <div className={styles.container}>
         <h1>{username}'s Profile</h1>
-        <button onClick={() => handleViewTypeChange('grid')}>Grid View</button>
-        <button onClick={() => handleViewTypeChange('list')}>List View</button>
+        {view === 'grid' ? (
+          <GridView photos={photos} onLoadMore={handleLoadMore} hasMore={true} />
+        ) : (
+          <ListView photos={photos} onLoadMore={handleLoadMore} hasMore={true} />
+        )}
       </div>
-      {viewType === 'grid' ? <GridView photos={photos} /> : <ListView photos={photos} />}
-    </>
+    </div>
   );
 };
 
-export default UserProfile;
+export default Profile;
