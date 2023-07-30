@@ -55,7 +55,7 @@ const Home: React.FC = () => {
           {view === 'grid' ? 'Switch to List View' : 'Switch to Grid View'}
         </button>
         {view === 'grid' ? (
-          <GridView photos={photos} isLoading={isLoading} onLoadMore={handleLoadMore} hasMore={hasMore} />
+           <GridView photos={photos} />
         ) : (
           <ListView photos={photos} isLoading={isLoading} onLoadMore={handleLoadMore} hasMore={hasMore} />
         )}

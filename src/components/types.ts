@@ -15,3 +15,13 @@ export type Photo = {
   likes: number;
   location: string | null;
 };
+
+
+export interface User {
+  id: string;
+  username: string;
+  name: string;
+  profileImage: string;
+  bio: string;
+  interests: string[];
+}

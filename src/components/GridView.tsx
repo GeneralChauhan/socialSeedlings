@@ -1,37 +1,31 @@
 // components/GridView.tsx
-import React from 'react';
-import { Photo } from './types';
-import FeedItem from './FeedItem';
+import React, { useState } from 'react';
 import styles from './styles.module.css';
+import { Photo } from './types';
+import GridItem from './GridItem';
+import Modal from './Modal';
 
 type GridViewProps = {
   photos: Photo[];
-  isLoading: boolean;
-  onLoadMore: () => void;
-  hasMore: boolean;
 };
 
-const GridView: React.FC<GridViewProps> = ({ photos, isLoading, onLoadMore, hasMore }) => {
-  const handleScroll = () => {
-    if (isLoading || !hasMore) return;
+const GridView: React.FC<GridViewProps> = ({ photos }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
 
-    const scrollOffset = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
-    if (scrollOffset < 200) {
-      onLoadMore();
-    }
+  const handleItemClick = (photo: Photo) => {
+    setSelectedPhoto(photo);
   };
 
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isLoading, hasMore]);
+  const handleCloseModal = () => {
+    setSelectedPhoto(null);
+  };
 
   return (
     <div className={styles.gridView}>
       {photos.map((photo) => (
-        <FeedItem key={photo.id} photo={photo} />
+        <GridItem key={photo.id} photo={photo} onClick={() => handleItemClick(photo)} />
       ))}
-      {isLoading && <div className={styles.loader}>Loading...</div>}
+      {selectedPhoto && <Modal photo={selectedPhoto} onClose={handleCloseModal} />}
     </div>
   );
 };
