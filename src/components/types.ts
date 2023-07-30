@@ -13,7 +13,6 @@ export type Photo = {
   };
   description: string | null;
   likes: number;
-  location: string | null;
 };
 
 
@@ -21,7 +20,8 @@ export interface User {
   id: string;
   username: string;
   name: string;
-  profileImage: string;
+  profile_image: any;
   bio: string;
   interests: string[];
+  tags: string[];
 }

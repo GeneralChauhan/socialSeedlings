@@ -155,26 +155,113 @@
 }
 
 /* styles/GridItem.module.css */
-.gridItem {
-  width: 33.33%; /* Set each item to take up 1/3 of the container width */
-  display: inline-block;
-  padding: 4px;
-  box-sizing: border-box;
+/* styles.module.css */
+.gridView {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-.gridItem img {
+.gridItem {
+  margin: 10px; /* Add a fixed margin to create a gap between items */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.imageWrapper {
+  position: relative;
   width: 100%;
-  height: 350px;
-  display: block;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-/* Clearfix for inline-block elements */
-.gridItem::after {
-  content: '';
-  display: table;
-  clear: both;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 5px;
 }
+
+.gridItem:hover .overlay {
+  opacity: 1;
+}
+
+.icon {
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modalImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modalDescription {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modalLikes {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 
 /* components/FeedItem.module.css */
 
@@ -297,3 +384,188 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
   
+
+/* Username.module.css */
+.userProfile {
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profileSection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center ;
+}
+.profileSectionText{
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.profilePicture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  border: 3px solid #3de697;
+}
+
+.userName {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.bio {
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.interestTag {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 5px 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.tabBar {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.tabButton:focus {
+  outline: none;
+}
+
+.tabButton.active {
+  color: #ff4500;
+}
+
+.gridView {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.listView {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.listItem {
+  display: flex;
+  gap: 10px;
+}
+
+.listItemImage {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listItemContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.photoTitle {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.photoDescription {
+  font-size: 14px;
+}
+
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+  width: 90%;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modalCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modalImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modalDescription {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.modalLikes {
+  font-size: 16px;
+  font-weight: bold;
+}
+/* components/Tag.module.css */
+.tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  padding: 4px 8px;
+  margin-right: 8px;
+  border-radius: 4px;
+}

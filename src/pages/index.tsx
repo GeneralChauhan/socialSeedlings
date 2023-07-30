@@ -7,7 +7,7 @@ import { Photo } from '../components/types';
 import Header from '../components/Headers';
 import GridView from '../components/GridView';
 import ListView from '../components/ListView';
-import fetchPhotos from '../utils/api';
+import { fetchPhotosRandom } from '../utils/api';
 
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const loadPhotos = async (pageNumber: number) => {
     setIsLoading(true);
     try {
-      const newPhotos = await fetchPhotos(pageNumber);
+      const newPhotos = await fetchPhotosRandom(pageNumber);
       setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
       setIsLoading(false);
     } catch (error) {
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    loadPhotos(1);
+    loadPhotos(10);
   }, []);
 
   const handleLoadMore = () => {
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
           {view === 'grid' ? 'Switch to List View' : 'Switch to Grid View'}
         </button>
         {view === 'grid' ? (
-           <GridView photos={photos} />
+          <GridView isLoading={isLoading} hasMore={hasMore} photos={photos} onLoadMore={handleLoadMore} />
         ) : (
           <ListView photos={photos} isLoading={isLoading} onLoadMore={handleLoadMore} hasMore={hasMore} />
         )}

@@ -1,24 +1,32 @@
-import axios from 'axios';
+// utils/api.ts
+import axios from "axios";
 
-// Replace 'your_access_key_here' with your actual Unsplash API access key
-const unsplashAccessKey = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY;
+const unsplashApi = axios.create({
+  baseURL: "https://api.unsplash.com/",
+  headers: {
+    Authorization: `Client-ID YOUR_UNSPLASH_ACCESS_KEY`,
+  },
+});
 
-const getUsernameProfile = async (username: string) => {
+export const getUserProfile = async (username: string) => {
   try {
-    const response = await axios.get(`https://api.unsplash.com/users/${username}`, {
-      headers: {
-        Authorization: `Client-ID ${unsplashAccessKey}`,
-      },
-    });
-
-    // The user profile image URL can be accessed using response.data.profile_image.large (or other sizes)
-    const profileImageURL = response.data.profile_image.large;
-    console.log('Profile Image URL:', profileImageURL);
-    return profileImageURL;
+    const response = await unsplashApi.get(`/users/${username}`);
+    return response.data;
   } catch (error) {
-    console.error('Error fetching user profile:', error);
-    return null;
+    throw new Error("Failed to fetch user profile");
   }
 };
 
-export default getUsernameProfile;
+export const getPhotosByUsername = async (username: string, page: number) => {
+  try {
+    const response = await unsplashApi.get(`/users/${username}/photos`, {
+      params: {
+        page,
+        per_page: 10, // Adjust the number of photos per page as needed
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to fetch user photos");
+  }
+};
