@@ -31,9 +31,12 @@ const Profile: React.FC = () => {
 
   const fetchPhotos = (username: string) => {
     axios
-      .get<Photo[]>(`https://api.example.com/photos/${username}`, {
-        // Replace "api.example.com" with your actual API endpoint
-      })
+    .get<Photo[]>(`https://api.unsplash.com/users/${username}/photos`, {
+      params: {
+        client_id: process.env.UNSPLASH_API_KEY,
+        per_page: 10, // Set the number of photos to fetch per page
+      },
+    })
       .then((response) => {
         setPhotos(response.data);
       })
@@ -41,16 +44,16 @@ const Profile: React.FC = () => {
         console.error('Error fetching photos:', error);
       });
   };
-
+  
   return (
     <div>
-      <Header toggleView={toggleView} view={view} />
+      <Header />
       <div className={styles.container}>
         <h1>{username}'s Profile</h1>
         {view === 'grid' ? (
-          <GridView photos={photos} onLoadMore={handleLoadMore} hasMore={true} />
-        ) : (
-          <ListView photos={photos} onLoadMore={handleLoadMore} hasMore={true} />
+          <GridView photos={photos} hasMore={hasMore} loading={loading} />
+          ) : (
+            <ListView photos={photos} hasMore={hasMore} loading={loading} />
         )}
       </div>
     </div>

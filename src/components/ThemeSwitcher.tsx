@@ -18,9 +18,7 @@ const ThemeSwitcher: React.FC = () => {
     localStorage.setItem('theme', newTheme);
   };
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
+  
 
   return (
     <div className={styles.themeSwitcher}>

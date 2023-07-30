@@ -1,12 +1,17 @@
 // components/types.ts
-export interface Photo {
-    id: string;
-    urls: {
-      small: string;
-      regular: string;
-      // Add other resolutions if needed
-    };
-    description?: string;
-    // Add other photo details here
-  }
-  
+export type Photo = {
+  id: string;
+  urls: {
+    regular: string;
+    thumb: string;
+    small: string; // Add the 'small' property to the 'urls' object
+  };
+  user: {
+    username: string;
+    name: string;
+    profileImage: string;
+  };
+  description: string | null;
+  likes: number;
+  location: string | null;
+};

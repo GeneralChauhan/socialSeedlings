@@ -1,15 +1,16 @@
+// components/Header.tsx
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
 import styles from './styles.module.css';
-
 
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   useEffect(() => {
-    console.log('Header rendered');
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   return (
     <header className={styles.header}>
       <nav className={styles.navbar}>

@@ -10,6 +10,7 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -22,7 +23,9 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
+
 export function ThemeProvider({ children }: ThemeProviderProps) {
+    
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
@@ -34,6 +37,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
+    console.log('newTheme', newTheme);
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
   };

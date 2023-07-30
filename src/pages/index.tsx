@@ -1,47 +1,66 @@
 // pages/index.tsx
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import styles from '../styles/Home.module.css';
+import { Photo } from '../components/types';
+import Header from '../components/Headers';
 import GridView from '../components/GridView';
 import ListView from '../components/ListView';
-import Header from '../components/Headers';
-import styles from '../styles/Home.module.css';
+import fetchPhotos from '../utils/api';
 
 const Home: React.FC = () => {
-  const [view, setView] = useState<'grid' | 'list'>('grid');
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [view, setView] = useState<'grid' | 'list'>('grid'); // Set the default view to 'grid'
+
+  const loadPhotos = async (pageNumber: number) => {
+    setIsLoading(true);
+    try {
+      const newPhotos = await fetchPhotos(pageNumber);
+      setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos]);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setHasMore(false);
+      console.error('Error fetching photos:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadPhotos(1);
+  }, []);
+
+  const handleLoadMore = () => {
+    if (isLoading || !hasMore) return;
+    const nextPageNumber = Math.ceil(photos.length / 10) + 1;
+    loadPhotos(nextPageNumber);
+  };
 
   const toggleView = () => {
     setView((prevView) => (prevView === 'grid' ? 'list' : 'grid'));
   };
 
-  const handleLoadMore = () => {
-    // Call the fetchPhotos function again to load more photos
-    fetchPhotos();
-  };
-
-  const fetchPhotos = () => {
-    // Implement the photo fetching logic here, similar to ListView and GridView
-    // This function should set the photos state and update hasMore accordingly
-  };
-
-  useEffect(() => {
-    fetchPhotos();
-  }, []);
-
   return (
-    <div>
-      <Header toggleView={toggleView} view={view} />
+    <>
       <div className={styles.container}>
         <Head>
-          <title>My App</title>
+          <title>Growwgram</title>
+          <meta name="description" content="Growwgram - Your daily dose of photos" />
         </Head>
+
+        <Header />
+        <button className={styles.viewButton} onClick={toggleView}>
+          {view === 'grid' ? 'Switch to List View' : 'Switch to Grid View'}
+        </button>
         {view === 'grid' ? (
-          <GridView onLoadMore={handleLoadMore} hasMore={hasMore} />
+          <GridView photos={photos} isLoading={isLoading} onLoadMore={handleLoadMore} hasMore={hasMore} />
         ) : (
-          <ListView onLoadMore={handleLoadMore} hasMore={hasMore} />
+          <ListView photos={photos} isLoading={isLoading} onLoadMore={handleLoadMore} hasMore={hasMore} />
         )}
       </div>
-    </div>
+    </>
   );
 };
 

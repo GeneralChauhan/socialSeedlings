@@ -1,43 +1,37 @@
 // components/GridView.tsx
-import { useEffect, useRef } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Photo } from './types';
 import FeedItem from './FeedItem';
 import styles from './styles.module.css';
-import { Photo } from './types';
 
-interface GridViewProps {
-  photos: Photo[]; // Add the 'photos' prop
+type GridViewProps = {
+  photos: Photo[];
+  isLoading: boolean;
   onLoadMore: () => void;
   hasMore: boolean;
-}
+};
 
-const GridView: React.FC<GridViewProps> = ({ photos, onLoadMore, hasMore }) => {
-  const loaderRef = useRef<HTMLDivElement>(null);
-
+const GridView: React.FC<GridViewProps> = ({ photos, isLoading, onLoadMore, hasMore }) => {
   const handleScroll = () => {
-    if (hasMore && loaderRef.current) {
-      const { top } = loaderRef.current.getBoundingClientRect();
-      if (top <= window.innerHeight) {
-        onLoadMore();
-      }
+    if (isLoading || !hasMore) return;
+
+    const scrollOffset = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
+    if (scrollOffset < 200) {
+      onLoadMore();
     }
   };
 
-  useEffect(() => {
-    // Add the scroll event listener when the component mounts
+  React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      // Clean up the scroll event listener when the component unmounts
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoading, hasMore]);
 
   return (
     <div className={styles.gridView}>
       {photos.map((photo) => (
         <FeedItem key={photo.id} photo={photo} />
       ))}
-      {hasMore && <div ref={loaderRef} />}
+      {isLoading && <div className={styles.loader}>Loading...</div>}
     </div>
   );
 };

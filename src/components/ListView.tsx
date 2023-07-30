@@ -1,43 +1,37 @@
 // components/ListView.tsx
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { Photo } from './types';
 import FeedItem from './FeedItem';
 import styles from './styles.module.css';
-import { Photo } from './types';
 
-interface ListViewProps {
-  photos: Photo[]; // Add the 'photos' prop
+type ListViewProps = {
+  photos: Photo[];
+  isLoading: boolean;
   onLoadMore: () => void;
   hasMore: boolean;
-}
+};
 
-const ListView: React.FC<ListViewProps> = ({ photos, onLoadMore, hasMore }) => {
-  const fetchPhotos = () => {
-    axios
-      .get<Photo[]>('https://api.unsplash.com/photos/random', {
-        params: {
-          count: 10,
-          client_id: process.env.UNSPLASH_API_KEY,
-        },
-      })
-      .then((response) => {
-        onLoadMore();
-      })
-      .catch((error) => {
-        console.error('Error fetching photos:', error);
-      });
+const ListView: React.FC<ListViewProps> = ({ photos, isLoading, onLoadMore, hasMore }) => {
+  const handleScroll = () => {
+    if (isLoading || !hasMore) return;
+
+    const scrollOffset = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
+    if (scrollOffset < 200) {
+      onLoadMore();
+    }
   };
 
-  useEffect(() => {
-    fetchPhotos();
-  }, []);
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isLoading, hasMore]);
 
   return (
     <div className={styles.listView}>
       {photos.map((photo) => (
         <FeedItem key={photo.id} photo={photo} />
       ))}
-      {hasMore && <div onClick={fetchPhotos}>Load More</div>}
+      {isLoading && <div className={styles.loader}>Loading...</div>}
     </div>
   );
 };
