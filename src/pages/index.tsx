@@ -12,10 +12,12 @@ import fetchPhotos from '../utils/api';
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [pageNumberState, setPageNumberState ] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [view, setView] = useState<'grid' | 'list'>('grid'); // Set the default view to 'grid'
 
   const loadPhotos = async (pageNumber: number) => {
+    setPageNumberState(pageNumberState + 1);
     setIsLoading(true);
     try {
       const newPhotos = await fetchPhotos(pageNumber);
@@ -29,7 +31,7 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
-    loadPhotos(1);
+    loadPhotos(pageNumberState);
   }, []);
 
   const handleLoadMore = () => {

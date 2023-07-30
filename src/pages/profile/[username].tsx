@@ -36,7 +36,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
 
   // State for the list of photos and infinite scroll
   const [isLoading, setIsLoading] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(2);
   const [hasMore, setHasMore] = useState(true);
   const [allPhotos, setAllPhotos] = useState(photos);
 
@@ -63,8 +63,6 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
       setIsLoading(false);
     }
   };
-
-  // ... (other code)
 
   // Function to switch between grid and list view
   const [view, setView] = useState<'grid' | 'list'>('grid');
@@ -108,7 +106,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
       </div>
 
       {/* Display GridView or ListView based on the selected tab */}
-      {view === 'grid' ? <GridView photos={allPhotos} /> : <ListView photos={allPhotos} isLoading={isLoading} onLoadMore={fetchPhotos} hasMore={hasMore} />}
+      {view === 'grid' ? (
+        <GridView photos={allPhotos} isLoading={isLoading} onLoadMore={fetchPhotos} hasMore={hasMore} />
+      ) : (
+        <ListView photos={allPhotos} isLoading={isLoading} onLoadMore={fetchPhotos} hasMore={hasMore} />
+      )}
     </div>
   );
 };
