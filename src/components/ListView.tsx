@@ -19,7 +19,7 @@ const ListView: React.FC<ListViewProps> = ({ photos, isLoading, onLoadMore, hasM
       onLoadMore();
     }
   };
-
+// checking for env vars
   React.useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
