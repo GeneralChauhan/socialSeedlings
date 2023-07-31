@@ -466,7 +466,16 @@ input:checked + .slider:before {
     padding: 20px;
     /* border-radius: 30px; */
   }
-  
+  .feedItem{
+    width: auto;
+  }
+  .gridView{
+    grid-template-columns: repeat(2, 1fr) !important;
+    width: 80% !important;
+  }
+  .userLinks{
+    margin: 0 auto;
+  }
   .profileSectionText {
     margin-top: 20px;
     margin-left: 0;
