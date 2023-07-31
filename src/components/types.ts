@@ -4,7 +4,7 @@ export type Photo = {
   urls: {
     regular: string;
     thumb: string;
-    small: string; // Add the 'small' property to the 'urls' object
+    small: string; 
   };
   user: {
     username: string;

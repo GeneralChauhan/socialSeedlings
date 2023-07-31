@@ -1,4 +1,3 @@
-// components/ListView.tsx
 import React from 'react';
 import { Photo } from './types';
 import FeedItem from './FeedItem';

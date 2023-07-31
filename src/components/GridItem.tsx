@@ -5,7 +5,7 @@ import { Photo } from './types';
 
 type GridItemProps = {
   photo: Photo;
-  onClick: () => void; // Click handler to open the modal
+  onClick: () => void;
 };
 
 const GridItem: React.FC<GridItemProps> = ({ photo, onClick }) => {
@@ -16,9 +16,7 @@ const GridItem: React.FC<GridItemProps> = ({ photo, onClick }) => {
         alt={photo.description || undefined }
         className={styles.gridImage}
       />
-      {/* <div className={styles.gridItemTextContainer}>
-        <p className={styles.gridItemText}>{photo.likes}</p>
-      </div> */}
+     
     </div>
   );
 };

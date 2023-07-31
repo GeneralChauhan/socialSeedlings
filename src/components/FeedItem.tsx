@@ -23,8 +23,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ photo }) => {
     const DOUBLE_CLICK_DELAY = 300; // Milliseconds
 
     if (now - lastClickTime < DOUBLE_CLICK_DELAY) {
-      // Double click detected
-      // setLikes((prevLikes) => prevLikes + 1);
+     
       setLiked(!liked);
       liked? setLikes((prevLikes) => prevLikes - 1): setLikes( (prevLikes) => prevLikes + 1);
     }
@@ -49,7 +48,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ photo }) => {
         <div className={styles.likes}>
           <span>{likes}</span>
           {
-            liked? <FavoriteIcon/>: <FavoriteBorderIcon/>
+            liked? <FavoriteIcon  />: <FavoriteBorderIcon/>
           }
         </div>
 

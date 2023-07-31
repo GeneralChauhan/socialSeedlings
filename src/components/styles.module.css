@@ -6,7 +6,6 @@
   background-color: var(--primary-bg-color);
   color: var(--text-color);
   }
- /* components/Header.module.css */
  .header {
   background-color: var(--primary-bg-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -14,6 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .navbar {
@@ -63,7 +63,7 @@
 }
 
 .themeButton {
-  background-color: transparent; /* Use secondary background color for the button */
+  background-color: transparent; 
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -74,36 +74,29 @@
 
 /* Style the button for the dark theme */
 [data-theme='dark'] .themeButton {
-  /* background-color: var(--text-color-overlay); */
   color: var(--text-overlay-color);
 }
 [data-theme='dark'] .feedBreak {
-  /* background-color: var(--text-color-overlay); */
   color: var(--text-color);
 }
 
 
 
-/* Add more styles as needed */
-/* components/ListView.module.css */
-
-
 .listView {
-  display: flex; /* Use flexbox */
-  flex-direction: column; /* Display photos in a single column */
+  display: flex; 
+  flex-direction: column; 
   gap: 20px;
   padding: 20px;
   background-color: var(--secondary-bg-color);
   width: 100%;
 }
 
-/* Optional: Adjust the width of each photo */
 .feedItem {
-  max-width: 100%; /* Set maximum width to prevent images from stretching */
-  margin: 0 auto; /* Center each photo horizontally */
-  width: 40%; /* Set the width of each photo */
-  height: auto; /* Set the height of each photo to create a square */
-  object-fit: cover; /* Ensure the entire image is visible */
+  max-width: 100%; 
+  margin: 0 auto;
+  width: 40%; 
+  height: auto;  
+  object-fit: cover;
 }
 
 
@@ -113,15 +106,13 @@
   font-size: 18px;
 }
 
-/* Add more styles as needed */
-/* styles/Modal.module.css */
 .modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black overlay */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -144,8 +135,8 @@
 .modalBox img {
   width: 100%;
   height: auto;
-  max-height: 400px; /* Limit the maximum height of the image within the modal */
-  object-fit: contain; /* Ensure entire image is visible without cropping */
+  max-height: 400px; 
+  object-fit: contain; 
   border-radius: 8px;
   margin-bottom: 16px;
 }
@@ -153,8 +144,6 @@
 .info {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
-  /* align-items: center; */
 }
 
 .info img {
@@ -173,27 +162,14 @@
   margin-right: 8px;
 }
 
-/* Clearfix for modal content */
 .modalContent::after {
   content: '';
   display: table;
   clear: both;
 }
 
-/* styles/GridItem.module.css */
-/* styles.module.css */
-  /* .gridView {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    height: auto;
-  } */
 
-.gridItem {
-  /* padding: 20px; */
-  /* border: 1px solid #ccc; */
-  /* background-color: #fff; */
-}
+
 
 .imageWrapper {
   position: relative;
@@ -216,7 +192,6 @@
   width: 100%;
 }
 .gridItemTextContainer{
-  /* margin-top: -200px; */
   position: relative;
   height: 100%;
   z-index: 100;
@@ -301,31 +276,24 @@
 }
 
 
-/* components/FeedItem.module.css */
-
-/* components/FeedItem.module.css */
 .feedItem {
   background-color: var(--primary-bg);
-  /* border: 1px solid red;  */
   border-radius: 5px;
   margin-bottom: 20px !important; 
-  /* padding: 10px; */
 }
 
 .feedItem img {
-  /* display: block; */
   width: 100%;
   height: 100%;
-  max-height: 400px; /* Set the maximum height for the image */
-  object-fit: cover; /* Ensure the image scales proportionally while covering its container */
+  max-height: 400px; 
+  object-fit: cover; 
   border-radius: 5px;
-  background-color: #f1f1f1; /* Provide a gray background color while the image is loading */
+  background-color: #f1f1f1; 
 }
 
 .feedItem .infoUser {
   display: flex;
   justify-content: space-between;
-  /* align-items: center; */
   margin-top: 10px;
   padding: 0 10px;
 }
@@ -334,7 +302,6 @@
   flex-direction: row !important;
   display: flex;
   align-items: center !important;
-  /* align-items: center; */
 }
 .user{
   display: flex;
@@ -371,9 +338,6 @@
 }
 
 
-/* Add more styles as needed */
-/* components/ProfilePhotos.module.css */
-
 .profilePhotos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -381,7 +345,6 @@
   padding: 20px;
 }
 
-/* Add more styles as needed */
 
 .themeSwitcher {
   position: fixed;
@@ -435,10 +398,7 @@ input:checked + .slider:before {
   transform: translateX(20px);
 }
   
-
-/* Username.module.css */
 .userProfile {
-  /* padding: 20px; */
   margin-left: auto;
   margin-right: auto;
   background-color: var(--secondary-bg-color);
@@ -450,7 +410,6 @@ input:checked + .slider:before {
   flex-direction: row;
   align-items: center;
   justify-content: center ;
-  /* width: 100vw; */
   background-color: var(--primary-bg-color);
   padding: 40px;
   border-radius: 0 0 30px 30px;
@@ -465,7 +424,6 @@ input:checked + .slider:before {
   .profileSection {
     flex-direction: column;
     padding: 20px;
-    /* border-radius: 30px; */
   }
   .feedItem{
     width: auto;
@@ -488,8 +446,6 @@ input:checked + .slider:before {
   height: 130px;
   border-radius: 30%;
   object-fit: cover;
-  /* margin-bottom: 20px; */
-  /* border: 3px solid #3de697; */
 }
 
 .userName {
@@ -521,8 +477,6 @@ input:checked + .slider:before {
 .userStats{
   display: flex;
   flex-direction: row;
-  /* margin-top: 20px;
-  margin-bottom: 20px; */
   
 }
 .userStatsWrapper{
@@ -537,7 +491,6 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /* margin-bottom: 20px; */
 }
 .userLinksButton{
   margin-right: 10px;
@@ -552,7 +505,6 @@ input:checked + .slider:before {
   border-radius: 100px;
   min-width: 60px;
 
-  /* text-align: center; */
   
 }
 
@@ -564,16 +516,16 @@ input:checked + .slider:before {
   margin-bottom: 10px;
 }
 .userLinksButton:hover{
-  /* background-color: var(--secondary-bg-color); */
   font-weight: 600;
 
-  /* border-radius: 5px; */
 }
-/* background-color: #007bff; */
 .tabBar {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  position: sticky;
+  top: 0;
+  background-color: var(--secondary-bg-color);
 }
 
 .tabButton {
@@ -695,7 +647,6 @@ input:checked + .slider:before {
   font-size: 16px;
   font-weight: bold;
 }
-/* components/Tag.module.css */
 .tag {
   display: inline-block;
   background-color: #f0f0f0;

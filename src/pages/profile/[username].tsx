@@ -97,10 +97,8 @@ const UserProfile: React.FC<UserProfileProps> = ({
     }
   };
 
-  // State for the view (grid or list)
-  const [view, setView] = useState<"grid" | "list">("grid");
+  const [view, setView] = useState<"grid" | "list">("list");
 
-  // Function to switch between grid and list view
   const handleTabChange = (newView: "grid" | "list") => {
     setView(newView);
   };
@@ -124,7 +122,6 @@ const UserProfile: React.FC<UserProfileProps> = ({
     <>
       <Header />
       <div className={styles.userProfile}>
-        {/* Profile section */}
         <div className={styles.profileSection}>
           <div className={styles.profileSectionImage}>
             {profileImage && (
@@ -172,8 +169,15 @@ const UserProfile: React.FC<UserProfileProps> = ({
           </div>
         </div>
 
-        {/* Tab bar to switch between GridView and ListView */}
         <div className={styles.tabBar}>
+        <button
+            className={`${styles.tabButton} ${
+              view === "list" ? styles.active : ""
+            }`}
+            onClick={() => handleTabChange("list")}
+          >
+            <SplitscreenIcon />
+          </button>
           <button
             className={`${styles.tabButton} ${
               view === "grid" ? styles.active : ""
@@ -182,17 +186,9 @@ const UserProfile: React.FC<UserProfileProps> = ({
           >
             <GridViewIcon />
           </button>
-          <button
-            className={`${styles.tabButton} ${
-              view === "list" ? styles.active : ""
-            }`}
-            onClick={() => handleTabChange("list")}
-          >
-            <SplitscreenIcon />
-          </button>
+          
         </div>
 
-        {/* Display GridView or ListView based on the selected tab */}
         {view === "grid" ? (
           <GridView
             photos={allPhotos}

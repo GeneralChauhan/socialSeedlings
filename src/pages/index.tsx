@@ -12,7 +12,7 @@ const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-  const [view, setView] = useState<'grid' | 'list'>('grid'); // Set the default view to 'grid'
+  const [view, setView] = useState<'grid' | 'list'>('grid'); 
 
   const loadPhotos = async (pageNumber: number) => {
     setIsLoading(true);
