@@ -32,7 +32,7 @@ const fetchPhotosRandom = async (count: number): Promise<Photo[]> => {
     }));
 
     return photosData;
-  } catch (error:any) {
+  } catch (error) {
     throw new Error('Error fetching random photos: ' + error.message);
   }
 };
@@ -59,7 +59,7 @@ const fetchPhotos = async (username: string, pageNumber: number): Promise<Photo[
     }));
 
     return photosData;
-  } catch (error:any) {
+  } catch (error) {
     throw new Error('Error fetching photos: ' + error.message);
   }
 };
@@ -72,9 +72,8 @@ const getUserProfile = async (username: string): Promise<string> => {
       },
     });
 
-    console.log('ass',response.data);
     return response.data.profile_image.large;
-  } catch (error:any) {
+  } catch (error) {
     throw new Error('Error fetching user profile: ' + error.message);
   }
 };
@@ -91,7 +90,7 @@ const fetchUserStats = async (username: string): Promise<UserStats> => {
 
     return response.data;
 
-  } catch (error:any) {
+  } catch (error) {
     throw new Error('Error fetching Stats: ' + error.message);
   }
 };
