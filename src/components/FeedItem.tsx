@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 import { Photo } from './types';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import Link from 'next/link';
 
 type FeedItemProps = {
   photo: Photo;
@@ -14,6 +15,8 @@ const FeedItem: React.FC<FeedItemProps> = ({ photo }) => {
   const [liked, setLiked] = useState(false);
 
   const [lastClickTime, setLastClickTime] = useState(0);
+
+  const rerouteURL = `/profile/@${photo.user.username}`;
 
   const handleLike = () => {
     const now = new Date().getTime();
@@ -34,11 +37,14 @@ const FeedItem: React.FC<FeedItemProps> = ({ photo }) => {
 
   return (
     <div className={styles.feedItem} onClick={handleLike}>
-      <img src={photo.urls.regular} alt={photo.description || 'Photo'} />
+      <img src={photo.urls.regular} alt={photo.description || 'Photo Description'} />
       <div className={styles.infoUser}>
         <div className={styles.user}>
-          <img src={photo.user.profileImage} alt={photo.user.username} />
+          <img src={photo.user.profileImage} className={styles.feedImage} alt={photo.user.username} />
+          <Link href={rerouteURL} className={styles.profileName}>
+
           <span>{photo.user.username}</span>
+          </Link>
         </div>
         <div className={styles.likes}>
           <span>{likes}</span>

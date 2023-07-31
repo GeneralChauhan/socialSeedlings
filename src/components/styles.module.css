@@ -37,6 +37,14 @@
   font-size: 18px;
   font-weight: bold;
 }
+.feedImage{
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  
+  border: 3px solid var(--text-color);
+  color: var(--text-color) !important;
+}
 .feedBreak{
   width: 30%;
   margin: 0 auto;
@@ -46,7 +54,10 @@
   border: 3px solid var(--text-color);
   color: var(--text-color) !important;
 }
-
+.profileName{
+  text-decoration: none;
+  color: var(--text-color);
+}
 .navItem a:hover {
   color: #007bff;
 }
@@ -448,6 +459,19 @@ input:checked + .slider:before {
   flex-direction: column;
   margin-left: 20px;
   color: var(--text-overlay-color);
+}
+@media screen and (max-width: 767px) {
+  .profileSection {
+    flex-direction: column;
+    padding: 20px;
+    /* border-radius: 30px; */
+  }
+  
+  .profileSectionText {
+    margin-top: 20px;
+    margin-left: 0;
+    text-align: center;
+  }
 }
 .profilePicture {
   width: 130px;
