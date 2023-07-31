@@ -3,17 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styles from '../../components/styles.module.css';
+import Header from '../../components/Headers';
 import GridView from '../../components/GridView'; // Import the updated GridView component
 import ListView from '../../components/ListView'; // Import the updated ListView component
 import { Photo, User } from '../../components/types';
-import { getUserProfile } from '../../utils/api'; // Import only the getUserProfile function
+import { getUserProfile, fetchPhotos , fetchUserStats } from '../../utils/api'; // Import only the getUserProfile function
 
 type UserProfileProps = {
   user: User;
   photos: Photo[];
 };
 
-const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
   const router = useRouter();
   const { username } = router.query;
 
@@ -36,11 +37,32 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
 
   // State for the list of photos and infinite scroll
   const [isLoading, setIsLoading] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(2);
   const [hasMore, setHasMore] = useState(true);
   const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
 
+  const loadData = async () => {
+    setIsLoading(true);
+    try {
+      const newPhotos1 = await fetchPhotos(username as string, 1);
+      setAllPhotos(newPhotos1);
+      setIsLoading(false);
+      const userStats = await  fetchUserStats(username as string);
+      console.log('userStats', userStats);
+
+    } catch (error) {
+      setIsLoading(false);
+      setHasMore(false);
+      console.error('Error fetching photos:', error);
+    }
+  }
+
+  useEffect(() => {
+    loadData();
+  }
+  , []);
   // Function to fetch more photos for infinite scroll
+
   const fetchMorePhotos = async () => {
     if (isLoading || !hasMore) return;
     setIsLoading(true);
@@ -50,6 +72,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
         `https://api.unsplash.com/users/${username}/photos?page=${pageNumber}&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY}`
       );
       const newPhotos = response.data;
+      console.log('newPhotos', newPhotos);
 
       setIsLoading(false);
       setPageNumber((prevPageNumber) => prevPageNumber + 1);
@@ -88,6 +111,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   }, [isLoading, hasMore]);
 
   return (
+    <>
+      <Header />
     <div className={styles.userProfile}>
       {/* Profile section */}
       <div className={styles.profileSection}>
@@ -97,6 +122,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
           )}
         </div>
         <div className={styles.profileSectionText}>
+          <h2 className={styles.userName}>{user.name}</h2>
           <h2 className={styles.userName}>{user.name}</h2>
           <p className={styles.bio}>{user.bio}</p>
         </div>
@@ -121,6 +147,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
       {/* Display GridView or ListView based on the selected tab */}
       {view === 'grid' ? <GridView photos={allPhotos}  isLoading={isLoading} onLoadMore={fetchMorePhotos} hasMore={hasMore} /> : <ListView photos={allPhotos} isLoading={isLoading} onLoadMore={fetchMorePhotos} hasMore={hasMore} />}
     </div>
+    </>
+
   );
 };
 
@@ -133,9 +161,11 @@ export async function getServerSideProps({ params }) {
         client_id: process.env.NEXT_PUBLIC_UNSPLASH_API_KEY,
       },
     });
-
+    
     const userProfile = userProfileResponse.data;
-
+    
+    
+    
     return {
       props: {
         user: userProfile,

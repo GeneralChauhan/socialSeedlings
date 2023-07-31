@@ -24,4 +24,5 @@ export interface User {
   bio: string;
   interests: string[];
   tags: string[];
+  
 }

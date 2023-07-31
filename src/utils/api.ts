@@ -39,13 +39,7 @@ const fetchPhotosRandom = async (count: number): Promise<Photo[]> => {
 
 const fetchPhotos = async (username: string, pageNumber: number): Promise<Photo[]> => {
   try {
-    const response = await axios.get<any[]>(`${BASE_URL}/users/${username}/photos`, {
-      params: {
-        page: pageNumber,
-        per_page: 1,
-        client_id: API_KEY,
-      },
-    });
+    const response = await axios.get<any[]>(`${BASE_URL}/users/${username}/photos?page=${pageNumber}&&client_id=${API_KEY}`);
 
     // Ensure 'location' property is handled properly
     const photosData: Photo[] = response.data.map((photo: any) => ({
@@ -78,10 +72,28 @@ const getUserProfile = async (username: string): Promise<string> => {
       },
     });
 
+    console.log('ass',response.data);
     return response.data.profile_image.large;
   } catch (error) {
     throw new Error('Error fetching user profile: ' + error.message);
   }
 };
 
-export { fetchPhotos, getUserProfile, fetchPhotosRandom };
+const fetchUserStats = async (username: string): Promise<User> => {
+  try {
+    const response = await axios.get<User>(`${BASE_URL}/users/${username}/statistics`,{
+      params: {
+        client_id: API_KEY,
+      },
+    });
+
+    console.log(response.data);
+
+    return response.data;
+
+  } catch (error) {
+    throw new Error('Error fetching Stats: ' + error.message);
+  }
+};
+
+export { fetchPhotos, getUserProfile, fetchPhotosRandom, fetchUserStats };

@@ -1,4 +1,10 @@
 /* styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 :root {
   /* Light theme colors */
@@ -17,18 +23,21 @@
   --primary-bg-color: #ffffff;
   --secondary-bg-color: #f0f0f0;
   --text-color: #333333;
+  --text-overlay-color: #000;
 }
 
 /* Styles for dark theme */
 [data-theme='dark'] {
-  --primary-bg-color: #1f1f1f;
-  --secondary-bg-color: #333333;
+  --primary-bg-color: #E0FE55;
+  --secondary-bg-color: #000;
   --text-color: #ffffff;
+  --text-overlay-color: #000;
 }
 
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  padding: 0;
+  font-family: 'Space Grotesk', Arial, sans-serif;
   background-color: var(--primary-bg-color);
   color: var(--text-color);
 }

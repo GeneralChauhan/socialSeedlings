@@ -14,8 +14,11 @@ const GridItem: React.FC<GridItemProps> = ({ photo, onClick }) => {
       <img
         src={photo.urls.thumb}
         alt={photo.description || undefined }
-        className={styles.image}
+        className={styles.gridImage}
       />
+      {/* <div className={styles.gridItemTextContainer}>
+        <p className={styles.gridItemText}>{photo.likes}</p>
+      </div> */}
     </div>
   );
 };
