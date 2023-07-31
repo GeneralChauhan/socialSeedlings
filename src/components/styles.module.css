@@ -411,7 +411,7 @@ input:checked + .slider:before {
   align-items: center;
   justify-content: center ;
   background-color: var(--primary-bg-color);
-  padding: 40px;
+  padding: 40px 90px;
   border-radius: 0 0 30px 30px;
 }
 .profileSectionText{
