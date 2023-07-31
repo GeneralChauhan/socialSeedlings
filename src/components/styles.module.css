@@ -70,6 +70,7 @@
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  rotate: 150deg;
 }
 
 /* Style the button for the dark theme */
@@ -403,6 +404,7 @@ input:checked + .slider:before {
   margin-right: auto;
   background-color: var(--secondary-bg-color);
 }
+
 
 .profileSection {
   margin: 0;
