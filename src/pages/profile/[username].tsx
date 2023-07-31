@@ -213,8 +213,9 @@ const UserProfile: React.FC<UserProfileProps> = ({
   );
 };
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params }:any) {
   const username = params.username;
+
 
   try {
     const userProfileResponse = await axios.get(

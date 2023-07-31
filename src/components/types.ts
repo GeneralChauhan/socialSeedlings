@@ -13,7 +13,6 @@ export type Photo = {
   };
   description: string;
   likes: number;
-  downloads: number;
   
 };
 
