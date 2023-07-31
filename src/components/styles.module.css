@@ -94,6 +94,7 @@
   gap: 20px;
   padding: 20px;
   background-color: var(--secondary-bg-color);
+  width: 100%;
 }
 
 /* Optional: Adjust the width of each photo */
@@ -600,12 +601,6 @@ input:checked + .slider:before {
   gap: 20px;
   width: 60%;
   margin: 0 auto;
-}
-
-.listView {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 }
 
 .listItem {

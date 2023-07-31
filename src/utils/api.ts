@@ -1,9 +1,44 @@
-// utils/api.ts
 import axios from 'axios';
 import { Photo, User, UserStats } from '../components/types';
 
 const API_KEY = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY;
 const BASE_URL = 'https://api.unsplash.com';
+
+const cache: Map<string, any> = new Map();
+
+const CACHE_EXPIRATION_TIME = 60 * 60 * 1000;
+
+const getCacheKey = (funcName: string, params: any[]): string => {
+  return `${funcName}_${JSON.stringify(params)}`;
+};
+
+const isCacheValid = (cachedData: any): boolean => {
+  return Date.now() - cachedData.timestamp < CACHE_EXPIRATION_TIME;
+};
+
+const fetchDataWithCaching = async (
+  funcName: string,
+  params: any[],
+  fetchFunction: (...params: any[]) => Promise<any>
+): Promise<any> => {
+  const cacheKey = getCacheKey(funcName, params);
+  const cachedData = cache.get(cacheKey);
+
+  if (cachedData && isCacheValid(cachedData)) {
+    console.log(`Using cached data for ${funcName}.`);
+    return cachedData.data;
+  }
+
+  try {
+    const fetchedData = await fetchFunction(...params);
+
+    cache.set(cacheKey, { data: fetchedData, timestamp: Date.now() });
+
+    return fetchedData;
+  } catch (error) {
+    throw new Error(`Error fetching data for ${funcName}: ${error.message}`);
+  }
+};
 
 const fetchPhotosRandom = async (count: number): Promise<Photo[]> => {
   try {
@@ -14,7 +49,6 @@ const fetchPhotosRandom = async (count: number): Promise<Photo[]> => {
       },
     });
 
-    // Extract the photo data from the API response
     const photosData: Photo[] = response.data.map((photo: any) => ({
       id: photo.id,
       urls: {
@@ -41,7 +75,6 @@ const fetchPhotos = async (username: string, pageNumber: number): Promise<Photo[
   try {
     const response = await axios.get<any[]>(`${BASE_URL}/users/${username}/photos?page=${pageNumber}&&client_id=${API_KEY}`);
 
-    // Ensure 'location' property is handled properly
     const photosData: Photo[] = response.data.map((photo: any) => ({
       id: photo.id,
       urls: {
@@ -80,19 +113,33 @@ const getUserProfile = async (username: string): Promise<string> => {
 
 const fetchUserStats = async (username: string): Promise<UserStats> => {
   try {
-    const response = await axios.get<UserStats>(`${BASE_URL}/users/${username}/statistics`,{
+    const response = await axios.get<UserStats>(`${BASE_URL}/users/${username}/statistics`, {
       params: {
         client_id: API_KEY,
       },
     });
 
-    console.log(response);
-
     return response.data;
-
   } catch (error) {
     throw new Error('Error fetching Stats: ' + error.message);
   }
 };
 
-export { fetchPhotos, getUserProfile, fetchPhotosRandom, fetchUserStats };
+// Wrapping each function with caching
+const cachedFetchPhotosRandom = (count: number): Promise<Photo[]> => {
+  return fetchDataWithCaching('fetchPhotosRandom', [count], fetchPhotosRandom);
+};
+
+const cachedFetchPhotos = (username: string, pageNumber: number): Promise<Photo[]> => {
+  return fetchDataWithCaching('fetchPhotos', [username, pageNumber], fetchPhotos);
+};
+
+const cachedGetUserProfile = (username: string): Promise<string> => {
+  return fetchDataWithCaching('getUserProfile', [username], getUserProfile);
+};
+
+const cachedFetchUserStats = (username: string): Promise<UserStats> => {
+  return fetchDataWithCaching('fetchUserStats', [username], fetchUserStats);
+};
+
+export { cachedFetchPhotosRandom as fetchPhotosRandom, cachedFetchPhotos as fetchPhotos, cachedGetUserProfile as getUserProfile, cachedFetchUserStats as fetchUserStats };
