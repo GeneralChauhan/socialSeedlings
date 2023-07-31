@@ -1,38 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Social Seedlings - Photo Feed App
 
-## Getting Started
+Social Seedlings is a web application that allows users to view random photos from Unsplash and explore photos uploaded by specific users. The app provides two main views: the News Feed view and the User Profile view.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+### News Feed View
+- Fetches random photos from Unsplash API using the `get-a-random-photo` endpoint.
+- Displays the photos in a grid structure view.
+- Each photo includes the photo description and the number of likes.
+- Users can click on the User Info section to view the user's profile page.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### User Profile View
+- Fetches user details based on the provided username from the Unsplash API.
+- Displays the user's profile image, name, and username.
+- Shows all the photos added by the user in a grid structure view.
+- Each photo includes the photo description and the number of likes.
+- Provides an option to switch to the list view of the images.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Installation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone the repository: `git clone https://github.com/GeneralChauhan/social-seedlings.git`
+2. Change directory to the project folder: `cd socialSeedlings`
+3. Install dependencies: `npm install`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Usage
 
-## Learn More
+1. Start the development server: `npm run dev`
+2. Open your browser and visit `http://localhost:3000` to access the app.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next: A JavaScript framework based on React for building user interfaces.
+- Axios: A promise-based HTTP client for making API requests.
+- CSS: Used for styling the app.
+- MUI Icons: For LightWeight SVG Icons
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
+Although this is just a Submission Assignment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- The app uses the Unsplash API to fetch random photos and user details. (Link to Unsplash API documentation: [Unsplash API Documentation](https://unsplash.com/documentation#get-a-random-photo))
+
+
