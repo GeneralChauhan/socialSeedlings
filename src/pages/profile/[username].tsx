@@ -6,15 +6,16 @@ import styles from '../../components/styles.module.css';
 import Header from '../../components/Headers';
 import GridView from '../../components/GridView'; // Import the updated GridView component
 import ListView from '../../components/ListView'; // Import the updated ListView component
-import { Photo, User } from '../../components/types';
+import { Photo, User, UserStats } from '../../components/types';
 import { getUserProfile, fetchPhotos , fetchUserStats } from '../../utils/api'; // Import only the getUserProfile function
 
 type UserProfileProps = {
   user: User;
   photos: Photo[];
+  userStats: any;
 };
 
-const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
+const UserProfile: React.FC<UserProfileProps> = ({ user, photos, userStats }) => {
   const router = useRouter();
   const { username } = router.query;
 
@@ -37,6 +38,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
 
   // State for the list of photos and infinite scroll
   const [isLoading, setIsLoading] = useState(false);
+  const [userViews, setUserViews] = useState<UserStats>();
   const [pageNumber, setPageNumber] = useState(2);
   const [hasMore, setHasMore] = useState(true);
   const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
@@ -47,8 +49,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
       const newPhotos1 = await fetchPhotos(username as string, 1);
       setAllPhotos(newPhotos1);
       setIsLoading(false);
-      const userStats = await  fetchUserStats(username as string);
-      console.log('userStats', userStats);
+      // const userStats1 = await fetchUserStats(username as string);
+      setUserViews(userStatsResponse);
 
     } catch (error) {
       setIsLoading(false);
@@ -59,8 +61,8 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
 
   useEffect(() => {
     loadData();
-  }
-  , []);
+  }  , []);
+
   // Function to fetch more photos for infinite scroll
 
   const fetchMorePhotos = async () => {
@@ -123,7 +125,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos }) => {
         </div>
         <div className={styles.profileSectionText}>
           <h2 className={styles.userName}>{user.name}</h2>
-          <h2 className={styles.userName}>{user.name}</h2>
+          <h2 className={styles.userName}>{userStats?.views?.total || "ss"}</h2>
           <p className={styles.bio}>{user.bio}</p>
         </div>
       </div>
@@ -164,11 +166,13 @@ export async function getServerSideProps({ params }) {
     
     const userProfile = userProfileResponse.data;
     
+    const userStatsResponse = await fetchUserStats(username as string);
     
     
     return {
       props: {
         user: userProfile,
+        userStats: userStatsResponse,
       },
     };
   } catch (error) {

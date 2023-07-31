@@ -26,3 +26,9 @@ export interface User {
   tags: string[];
   
 }
+
+export interface UserStats {
+  downloads: string[];
+  views: string[];
+  likes: string[];
+}

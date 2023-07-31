@@ -1,6 +1,6 @@
 // utils/api.ts
 import axios from 'axios';
-import { Photo, User } from '../components/types';
+import { Photo, User, UserStats } from '../components/types';
 
 const API_KEY = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY;
 const BASE_URL = 'https://api.unsplash.com';
@@ -79,15 +79,15 @@ const getUserProfile = async (username: string): Promise<string> => {
   }
 };
 
-const fetchUserStats = async (username: string): Promise<User> => {
+const fetchUserStats = async (username: string): Promise<UserStats> => {
   try {
-    const response = await axios.get<User>(`${BASE_URL}/users/${username}/statistics`,{
+    const response = await axios.get<UserStats>(`${BASE_URL}/users/${username}/statistics`,{
       params: {
         client_id: API_KEY,
       },
     });
 
-    console.log(response.data);
+    console.log(response);
 
     return response.data;
 
