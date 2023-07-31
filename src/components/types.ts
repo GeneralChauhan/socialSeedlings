@@ -22,8 +22,7 @@ export interface User {
   name: string;
   profile_image: any;
   bio: string;
-  interests: string[];
-  tags: string[];
+  total_likes: string;
   
 }
 

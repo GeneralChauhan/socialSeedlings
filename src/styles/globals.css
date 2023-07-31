@@ -20,7 +20,7 @@
 
 /* Default styles for light theme */
 [data-theme='light'] {
-  --primary-bg-color: #ffffff;
+  --primary-bg-color: #c3e2f7;
   --secondary-bg-color: #f0f0f0;
   --text-color: #333333;
   --text-overlay-color: #000;

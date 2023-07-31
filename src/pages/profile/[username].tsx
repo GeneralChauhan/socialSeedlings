@@ -8,6 +8,7 @@ import GridView from '../../components/GridView'; // Import the updated GridView
 import ListView from '../../components/ListView'; // Import the updated ListView component
 import { Photo, User, UserStats } from '../../components/types';
 import { getUserProfile, fetchPhotos , fetchUserStats } from '../../utils/api'; // Import only the getUserProfile function
+import formatNumber  from '../../utils/functions'; // Import only the getUserProfile function
 
 type UserProfileProps = {
   user: User;
@@ -125,8 +126,23 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, photos, userStats }) =>
         </div>
         <div className={styles.profileSectionText}>
           <h2 className={styles.userName}>{user.name}</h2>
-          <h2 className={styles.userName}>{userStats?.views?.total || "ss"}</h2>
           <p className={styles.bio}>{user.bio}</p>
+          <div className={styles.userStats}>
+            <div className={styles.userStatsWrapper}>
+              <h4 className={styles.userStatsText}>{formatNumber(userStats?.downloads?.total) }</h4>
+              <p className={styles.userStatsLabel}>Downloads</p>
+            </div>
+            <div className={styles.userStatsWrapper}>
+
+          <h4 className={styles.userStatsText}>{formatNumber(userStats?.views?.total) }</h4>
+              <p className={styles.userStatsLabel}>Views</p>
+            </div>
+            <div className={styles.userStatsWrapper}>
+              <h4 className={styles.userStatsText}>{user.total_likes }</h4>
+              <p className={styles.userStatsLabel}>Likes</p>
+            </div>
+
+          </div>
         </div>
       </div>
 
