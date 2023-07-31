@@ -45,8 +45,8 @@ const Home: React.FC = () => {
     <>
       <div className={styles.container}>
         <Head>
-          <title>Growwgram</title>
-          <meta name="description" content="Growwgram - Your daily dose of photos" />
+          <title>Social Seedlings</title>
+          <meta name="description" content="Social Seedlings - Your daily dose of photos" />
         </Head>
 
         <Header />
