@@ -41,7 +41,10 @@
   width: 30%;
   margin: 0 auto;
   height: 3px;
-  color: var(--text-color);
+  margin-top: 40px;
+  border-radius: 15px;
+  border: 3px solid var(--text-color);
+  color: var(--text-color) !important;
 }
 
 .navItem a:hover {
