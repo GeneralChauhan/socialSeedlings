@@ -15,6 +15,7 @@ const Modal: React.FC<ModalProps> = ({ photo, onClose }) => {
   const handleOutsideClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (modalRef.current && event.target === modalRef.current) {
       onClose();
+      console.log(photo.description);
     }
   };
 
@@ -23,6 +24,12 @@ const Modal: React.FC<ModalProps> = ({ photo, onClose }) => {
       <div className={styles.modalContent}>
         {/* Use the FeedItem component to display the photo and its details */}
         <FeedItem photo={photo} />
+        <div className={styles.photoDetailsModal}>
+          
+            <p className={styles.photoDescriptionModal}>{photo.description || "zxcvb"}</p>
+
+          
+        </div>
       </div>
     </div>
   );

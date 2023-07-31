@@ -23,12 +23,14 @@
   --primary-bg-color: #c3e2f7;
   --secondary-bg-color: #f0f0f0;
   --text-color: #333333;
+  --text-color-imp: #333333;
   --text-overlay-color: #000;
 }
 
 /* Styles for dark theme */
 [data-theme='dark'] {
   --primary-bg-color: #E0FE55;
+  --text-color-imp: #333333;
   --secondary-bg-color: #000;
   --text-color: #ffffff;
   --text-overlay-color: #000;

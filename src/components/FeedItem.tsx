@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import { Photo } from './types';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 type FeedItemProps = {
   photo: Photo;
@@ -33,28 +35,23 @@ const FeedItem: React.FC<FeedItemProps> = ({ photo }) => {
   return (
     <div className={styles.feedItem} onClick={handleLike}>
       <img src={photo.urls.regular} alt={photo.description || 'Photo'} />
-      <div className={styles.info}>
+      <div className={styles.infoUser}>
         <div className={styles.user}>
           <img src={photo.user.profileImage} alt={photo.user.username} />
           <span>{photo.user.username}</span>
         </div>
         <div className={styles.likes}>
           <span>{likes}</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M5 10l7-7m0 0l7 7m-7-7v18"
-            />
-          </svg>
+          {
+            liked? <FavoriteIcon/>: <FavoriteBorderIcon/>
+          }
         </div>
+
       </div>
+      <div >
+        <p className={styles.photoDescription}>{photo.description || 'Photo'}</p>
+      </div>
+      <div className={styles.feedBreak}></div>
     </div>
   );
 };

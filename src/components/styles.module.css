@@ -33,9 +33,15 @@
 
 .navItem a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--text-color-imp);
   font-size: 18px;
   font-weight: bold;
+}
+.feedBreak{
+  width: 30%;
+  margin: 0 auto;
+  height: 3px;
+  color: var(--text-color);
 }
 
 .navItem a:hover {
@@ -43,8 +49,7 @@
 }
 
 .themeButton {
-  background-color: var(--secondary-bg-color); /* Use secondary background color for the button */
-  color: var(--text-color);
+  background-color: transparent; /* Use secondary background color for the button */
   border: none;
   padding: 8px 16px;
   border-radius: 4px;
@@ -55,9 +60,14 @@
 
 /* Style the button for the dark theme */
 [data-theme='dark'] .themeButton {
-  background-color: var(--secondary-bg-color-dark);
-  color: var(--text-color-dark);
+  /* background-color: var(--text-color-overlay); */
+  color: var(--text-overlay-color);
 }
+[data-theme='dark'] .feedBreak {
+  /* background-color: var(--text-color-overlay); */
+  color: var(--text-color);
+}
+
 
 
 /* Add more styles as needed */
@@ -76,8 +86,8 @@
 .feedItem {
   max-width: 100%; /* Set maximum width to prevent images from stretching */
   margin: 0 auto; /* Center each photo horizontally */
-  width: 250px; /* Set the width of each photo */
-  height: 250px; /* Set the height of each photo to create a square */
+  width: 40%; /* Set the width of each photo */
+  height: auto; /* Set the height of each photo to create a square */
   object-fit: cover; /* Ensure the entire image is visible */
 }
 
@@ -127,7 +137,9 @@
 
 .info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  /* align-items: center; */
 }
 
 .info img {
@@ -279,14 +291,14 @@
 /* components/FeedItem.module.css */
 .feedItem {
   background-color: var(--primary-bg);
-  border: 1px solid var(--border-color);
+  /* border: 1px solid red;  */
   border-radius: 5px;
-  margin-bottom: 200px !important;
-  padding: 10px;
+  margin-bottom: 20px !important; 
+  /* padding: 10px; */
 }
 
 .feedItem img {
-  display: block;
+  /* display: block; */
   width: 100%;
   height: 100%;
   max-height: 400px; /* Set the maximum height for the image */
@@ -295,18 +307,31 @@
   background-color: #f1f1f1; /* Provide a gray background color while the image is loading */
 }
 
-.feedItem .info {
+.feedItem .infoUser {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   margin-top: 10px;
+  padding: 0 10px;
 }
 
 .feedItem .info .user {
+  flex-direction: row !important;
   display: flex;
-  align-items: center;
+  align-items: center !important;
+  /* align-items: center; */
 }
-
+.user{
+  display: flex;
+  flex-direction: row !important;
+  align-items: center !important; 
+}
+.user img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
 .feedItem .info .user img {
   width: 30px;
   height: 30px;
@@ -459,8 +484,8 @@ input:checked + .slider:before {
 .userStats{
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  /* margin-top: 20px;
+  margin-bottom: 20px; */
   
 }
 .userStatsWrapper{
@@ -471,6 +496,43 @@ input:checked + .slider:before {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.userLinks{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  /* margin-bottom: 20px; */
+}
+.userLinksButton{
+  margin-right: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 10px;
+  text-decoration: none;
+  color: red;
+  border: 1px solid rgb(100, 100, 100);
+  border-radius: 100px;
+  min-width: 60px;
+
+  /* text-align: center; */
+  
+}
+
+.feedItemIcons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.userLinksButton:hover{
+  /* background-color: var(--secondary-bg-color); */
+  font-weight: 600;
+
+  /* border-radius: 5px; */
+}
+/* background-color: #007bff; */
 .tabBar {
   display: flex;
   justify-content: center;
@@ -485,6 +547,7 @@ input:checked + .slider:before {
   background-color: transparent;
   cursor: pointer;
   transition: color 0.2s;
+  color: var(--primary-bg-color) ;
 }
 
 .tabButton:focus {
@@ -499,6 +562,8 @@ input:checked + .slider:before {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .listView {
@@ -537,6 +602,9 @@ input:checked + .slider:before {
 
 .photoDescription {
   font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  padding: 0 10px;
 }
 
 .modalContainer {
@@ -551,14 +619,19 @@ input:checked + .slider:before {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
 }
+.photoDetailsModal{
 
+}
 .modalContent {
   background-color: #fff;
   border-radius: 10px;
   padding: 20px;
-  max-width: 800px;
+  max-width: 90vw ;
   width: 90%;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .modalCloseButton {

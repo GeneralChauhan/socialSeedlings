@@ -5,7 +5,6 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { Photo } from '../components/types';
 import Header from '../components/Headers';
-import GridView from '../components/GridView';
 import ListView from '../components/ListView';
 import { fetchPhotosRandom } from '../utils/api';
 
@@ -51,14 +50,10 @@ const Home: React.FC = () => {
         </Head>
 
         <Header />
-        <button className={styles.viewButton} onClick={toggleView}>
-          {view === 'grid' ? 'Switch to List View' : 'Switch to Grid View'}
-        </button>
-        {view === 'grid' ? (
-          <GridView isLoading={isLoading} hasMore={hasMore} photos={photos} onLoadMore={handleLoadMore} />
-        ) : (
+       
+        
           <ListView photos={photos} isLoading={isLoading} onLoadMore={handleLoadMore} hasMore={hasMore} />
-        )}
+        
       </div>
     </>
   );

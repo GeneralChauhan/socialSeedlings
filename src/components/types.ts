@@ -11,8 +11,10 @@ export type Photo = {
     name: string;
     profileImage: string;
   };
-  description: string | null;
+  description: string;
   likes: number;
+  downloads: number;
+  
 };
 
 
@@ -23,6 +25,10 @@ export interface User {
   profile_image: any;
   bio: string;
   total_likes: string;
+  instagram_username: string;
+  twitter_username: string;
+  portfolio_url: string;
+  total_photos: string;
   
 }
 

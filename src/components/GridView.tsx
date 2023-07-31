@@ -40,6 +40,8 @@ const GridView: React.FC<GridViewProps> = ({ isLoading, hasMore, photos, onLoadM
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
+    console.log(photos);
+
     };
   }, []);
 
