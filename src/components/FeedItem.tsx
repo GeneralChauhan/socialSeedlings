@@ -16,7 +16,7 @@ const FeedItem: React.FC<FeedItemProps> = ({ photo }) => {
 
   const [lastClickTime, setLastClickTime] = useState(0);
 
-  const rerouteURL = `/profile/@${photo.user.username}`;
+  const rerouteURL = `/profile/${photo.user.username}`;
 
   const handleLike = () => {
     const now = new Date().getTime();
