@@ -44,4 +44,9 @@ body {
   color: var(--text-color);
 }
 
+@media screen and (max-width: 767px) {
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
 /* Add any additional global styles as needed */

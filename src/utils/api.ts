@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Photo, User, UserStats } from '../components/types';
 
-const API_KEY = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY;
+const API_KEY = process.env.NEXT_PUBLIC_UNSPLASH_API_KEY ;
 const BASE_URL = 'https://api.unsplash.com';
 
 const cache: Map<string, any> = new Map();
